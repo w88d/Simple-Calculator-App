@@ -1,33 +1,85 @@
-let flag=0;
-        let output = document.getElementById("ot");
-        function display(num){
-            if (flag==1)
-            {
-                output.value="num";
-                output.value=num;
-                flag=0
-            }
-            else{
-                output.value+= num;
-            }    
-        }
+document.addEventListener('DOMContentLoaded', (event) => {
+    const resultElement = document.querySelector('.container-result');
 
-        function calculate(){
-            try {
-                output.value = eval(output.value);
-                flag =1;
-            }
-            catch(err)
-            {
-                output.value="";
-                alert("INVALID");
-            }
-        }
+    let currentInput = '';
+    let operator = null;
+    let firstOperand = null;
 
-        function del(){
-            output.value = output.value.slice(0, -1);      
+    const buttons = document.querySelectorAll(".grid-item, .grid-item-big");
+
+    buttons.forEach(button => {
+        button.addEventListener("click", () => {
+        const value = button.textContent.trim();
+
+        if(!isNaN(value) || value === "."){
+            handleNumber(value)
+        } else {
+            handleOperator(value)
+        }
+        })
+
+    })
+
+    const backspace = document.querySelector('.backspace-button');
+    backspace.addEventListener('click', () => {
+        if(currentInput.length > 0) {
+            currentInput = currentInput.slice(0, -1);
+            updateDisplay();
+        }
+    })
+
+    const handleNumber = (number) => {
+        if(operator && firstOperand === null) {
+        firstOperand = currentInput;
+        currentInput = '';
         }
         
-        function clr(){
-            output.value = "";
+        currentInput += number;
+        updateDisplay();
         }
+
+    const handleOperator = (op) => {
+        if(op === "AC") {
+        currentInput = '';
+        operator = null;
+        firstOperand = null;
+        } else if(op === "=") {
+        if(operator && firstOperand != null) {
+        currentInput = String(
+        performCalculation(firstOperand, currentInput, operator)
+        )
+        operator = null;
+        firstOperand = null;
+        }
+        } else {
+            operator = op;
+            if(currentInput === "") {
+                currentInput = "0"
+            }}
+        updateDisplay();
+        }
+
+        const performCalculation = (a, b, op) => {
+            a = parseFloat (a)
+            b = parseFloat (b)
+
+            switch(op) {
+                case "+":
+                return a + b;
+                case "-":
+                    return a - b;
+                    case "*":
+                        return a * b;
+                        case "/":
+                            return a / b;
+                            default:
+                             return b;
+                            }
+            }
+
+
+
+    const updateDisplay = () => {
+        resultElement.textContent = currentInput;
+        }
+})
