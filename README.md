@@ -41,7 +41,8 @@ You can also use your keyboard to operate the calculator:
 
 ## Screenshots
 
-<img width="600" alt="‏لقطة الشاشة ١٤٤٥-١١-١٦ في ١ ٢٢ ٠٥ ص" src="https://github.com/w88d/Simple-Calculator-App/assets/140564404/c5cdadef-3ab5-4d3d-ae3e-0a0d5d5c0a51">
+<img width="501" alt="vvv" src="https://github.com/w88d/Simple-Calculator-App/assets/140564404/c0ec588e-8152-45dc-9417-84c2bb577b55">
+
 
 
 ## Contributing
